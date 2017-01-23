@@ -245,5 +245,91 @@ Curtis Stevens， Western Digital Technologies, Inc.
 
 [TOC]
 
+## 1 简介
 
-> Written with [StackEdit](https://stackedit.io/).
+### 1.1 背景
+
+人们需要有一种用户友好的将外设插入到PC的即插即用方法，因此USB应运而生。USB不仅仅能够把外设插入到PC上，打印机可以直接通过USB接口连接照相机，移动设备可以通过USB接口连接鼠标和键盘。USB技术在汽车，电视，和机顶盒等都很常见。作为一种协议，也可以在很多非传统的应用，如工业自动化领域采用USB协议。并且，在移动设备上，电源的充电方案采用USB技术已经在国际同行内得到了广泛的认可。
+
+最开始，USB只提供两种供外设使用的速度(12 Mbps和1.5Mbps)。随着PC的性能变得越来越强大，具备了处理更大规模数据的能力，用户需要跟PC交互更多的数据。这导致在2000年，USB 2.0规范应运而生，它提供了高达480Mbps的第三种传输速度。到2006年，业内出现了两件事情：HDDs 的	传输速度超过了100MB/s, 超出了USB 2.0的最高32MB/s的带宽，同时，数字内容用户的数量也达到了空前的规模。因此，USB 社区为了响应这个问题，提出了传输速率高达450MB/s的USB 3.0，并且可以向后兼容 USB 2.0. 
+
+现在更快更大的存储，高清视频，USB作为系统的外部扩展的需求的发展，带宽更宽已经成为一个持续发展的趋势。在这种背景下，USB 3.1 通过把高速USB的时钟频率提高到10Gbps，加强数据编码效率后， 把USB的带宽提升到1GB/s.
+
+### 1.2 规范目的
+
+本文档定义了最新的USB工业标准，USB 3.1. 本规范描述了协议定义，传输类型，总线管理，设计和构建兼容本规范的系统和外设的编程接口。USB 3.1主要是对USB 3.0的增强，使之能够提供双倍的带宽，服务于像SSD和高清显示器这样的设备。
+
+本规范设计的增强高速集合了应用于USB 3.0和USB 3.1的特性或需求。另外，那些特定的与USB 3.0定义不同的差异，被称为SSP(SuperSpeedPlus). 通常，SS使指5Gbps的操作，SSP指的是10Gbps的操作。
+
+USB 3.1的目标仍然是提供一个开放的架构，使来自不同厂家的设备能够互通，维护和利用现存的USB基础架构(设备驱动，软件接口等)。本规范作为一个面向PC架构，包括笔记本电脑，商用电脑，和家庭环境，简单的设备于设备通信的增强。本规范的目的是给系统OEMs, 外设开发者足够的空间来丰富产品和市场，避免产品间由于封闭的接口而造成的不兼容问题。
+
+### 1.3 文档范围
+
+本规范主要面向外设开发者和平台/转接器开发者，但是也为平台操作系统，BIOS，设备驱动，IHVs/ISVs转接器，和系统OEMs. 本规范可以用来开发新产品和对应的软件。
+
+使用本规范的设备开发者需要先了解USB 2.0 规范。尤其是，USB 3.1 设备必须实现USB 2.0规范定义的设备框架命令和描述符。工作在10Gbps速度的设备必须实现本规范版本定义的SSP - 超高速+。
+
+### 1.4 USB 产品兼容
+
+USB 3.1 规范的使用者，必须签署 USB 3.0 使用者协议，该协议给他们从发起者和开放其跟USB3.1规范兼容的应用于其产品中的知识产权的其他使用者处获取访问一个合理，非歧视性(RANDZ) 许可。使用者可以使用USB-IF提供的测试工具测试其产品的兼容性。通过本规范兼容性测试的产品，允许使用在标志许可中定义的USB-IF标志。
+
+从USB 3.1 规范开始，产品兼容性需求禁止使用非认证的线缆和连接器。在有许可证的情况下，才可以在产品上，文档中，或包装上使用任何注册的图标或标志，而这个许可证只有产品通过相应的认证才能获得。
+
+### 1.5 文档组织结构
+
+第1章到第4章是总览部分，第5章到第11章包含了详细的技术描述。
+
+读者应该联系操作系统供应商绑定操作系统到USB 3.1.
+
+### 1.6 设计目标
+
+USB 3.0 是USB的一个革命性的进程。USB 3.1 是 USB 3.0的进化版本，以增加USB的带宽。但是目的还是一样: 终端用户可以把他们看做是USB 2.0 和 USB 3.1，只是更快而已。为了达到这个目标而做的一些关键设计列举如下: 
+
+* 保留智能主机和简单外设的USB模型。
+* 兼容现存的USB基础设施。如今有巨量的USB设备在运行。他们流行的很大一部分原因是因为现存的稳定的软件接口，简单的设备驱动开发，和大量的通用接口标准设备族驱动(HID, 大容量存储，音频等)。增强的超高速USB设备完整的保留了这些软件基础设施，以支持开发者能够继续使用相同的接口，兼容他们已完成的开发工作。
+* 极大的提高了功耗管理。提供了一系列丰富的管理机制以允许设备让总线进入低功耗状态，降低了传送数据的功耗和待机功耗。
+* 易用性是所有USB变种已知保持的关键设计目标。
+* 保持投资。大量的PC只支持USB 2.0. 大量的USB 2.0 设备在使用。向后兼容的设计允许加强的超高速设备可以使用Type-A的连接器与USB 2.0的高速设备连接。
+* 允许主机控制器在不改变操作系统的前提下就能利用USB 3.1的速度和特性。
+
+### 1.7 关联文档
+
+Universal Serial Bus Specification, Revision 2.0
+
+USB On-the-Go Supplement to the USB 2.0 Specification, Revision 1.3
+
+USB On-the-Go and Embedded Host Supplement to the USB 3.0 Specification, Revision 1.0
+
+Universal Serial Bus Micro-USB Cables and Connectors Specification, Revision 1.01
+
+EIA-364-1000.01: Environmental Test Methodology for Assessing the Performance of Electrical
+
+Connectors and Sockets Used in Business Office Applications
+
+USB 3.0 Connectors and Cable Assemblies Compliance Document
+
+USB SuperSpeed Electrical Test Methodology white paper
+
+USB 3.0 Jitter Budgeting white paper
+
+INCITS TR-35-2004, INCITS Technical Report for Information Technology – Fibre Channel – Methodologies for Jitter and Signal Quality Specification (FC-MJSQ)
+
+Universal Serial Bus 3.0 Specification (including errata and ECNs through May 1, 2011)
+
+Universal Serial Bus Power Delivery Specification, Revision 1.0 Including Errata through 31-October-2012
+
+## 2 术语和缩略语
+
+本章列举，定义了本规范中使用的术语和缩略语。注意，本章没有列举的术语或缩略语，请参考一般意义或查字典。
+
+| 术语/缩略语 | 说明 |
+| ----
+| ACK | 握手包，肯定确认 |
+| ACK Tx Header Sequence Number | 期望的被认可的连接控制字头中的序列号 |
+| active device | 上电的并且没有挂起的设备 |
+| asynchronous data | 没有严格的时间间隔的数据包 |
+| attached | 例如U盘attached在PC上 |
+| AWG# | 电线横截面测量，美国线规标准定义 |
+
+
+> Written with [StackEdit](https://stackedit.io/)
