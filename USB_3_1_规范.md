@@ -398,5 +398,43 @@ Universal Serial Bus Power Delivery Specification, Revision 1.0 Including Errata
 | Gen 2 | 表示信号速率达10Gbps的物理层 |
 | Gen X | Gen 1和 Gen 2的通用语 |
 | handshake packet | 接受或拒绝某个数据包的一类数据包。例如ACK, NRDY, ERDY |
+| header | 数据包头。例如 DPH, LMP, TP |
+| Header Sequence Number Advertisement | 连接到U0的伙伴间的接受应答发送数据包头序列号交换 |
+| high-speed | 工作在480Mbps的USB |
+| host | 装有USB主机控制器的主机，包含硬件和软件 |
+| host controller | 为系统提供USB设备接口的装置 |
+| Host Reset | 使用TS1/TS2序列的复位机制 |
+| HPSTART | 数据包开始的帧序列 |
+| hub | 提供额外的USB接口的装置 |
+| Hub Delay Measurement (HDM) | PTM的HDM机制定义了一系列hub的特性，以加强向下游传送的ITP中的同步时间戳的准确性 |
+| hub tier | 主机和外设之间的通信链路上的所有USB链接 + 1 | 
+| ID pin | USB 3.1 micro连接器族中的一个管脚，用来区别USB 3.1的micro-A和micro-B插头 |
+| Inband Reset | 在链路中传播复位超高速和LFPS信号的机制 |
+| informative | 说明性目的的信息 |
+| interrupt transfer | 4种USB传输类型之一。中断传输有一个界定延时，通常用于处理服务 |
+| isochronous data | 有固定传输速率的数据流 |
+| isochronous device | 带有同步端点的实体, 发送或接收采样的模拟流或同步的数据流 | |
+| isochronous sink endpoint | 接收并处理从主机发送的同步数据流的端点 |
+| isochronous source endpoint | 生成并发送到主机的同步数据流的端点 |
+| isochronous transfer | 4种USB传输类型之一。同步传输为主机和设备提供周期的，连续的传输 |
+| ITP | 同步时间戳包。主机周期性的发送此数据包以通知设备其总线时间 |
+| jitter | 由机械和电子改变造成的不同步的一种趋势。特指，传输介质上的数字脉冲的相位偏移 |
+| KB | 1024 字节 |
+| K codes | 应用在8b/10b编码中的控制类型。 SHP - 开始头包 SDP - 开始数据包 END - 结束头/数据包 EDB - 结束坏包 SLC - 开始连接命令 COM - 逗号 SKP - 跳过 EPF - 结束包帧 |
+| lane | 一个端口中的Tx和另一个端口中的Rx的连接 |
+| LBPM | 基于PWM信号的LFPS |
+| LCSTART | 表示一个连接命令开始的帧序列 |
+| LDM | 见 Link Delay Measurement. |
+| LDM Context | LDM 请求和响应中记录的时间戳 |
+| LDM Link Delay | 发送和接收的链路延时 |
+| LDM Requester | USB集线器或设备使用LDM协议跟上游的集线器或主控制器通信，并且测量上行链路的延时 |
+| LDM Responder | USB集线器或主控制器使用LDM协议跟下游集线器或设备通信 |
+| LFPS | 低频周期信号。用于在不使用加强超高速信号的链路中的通信 |
+| LFSR | 线性反馈移位寄存器。用于为干扰码生成伪随机数 |
+| LI | 逻辑空闲 |
+| Link | 2个端口间的连接。包含上游和下游的子连接，见图2-1 |
+| link command | 8个符号组成的序列，用于链路层的流控，重试，电源管理，和设备移除 |
+| Link Control Word | 2字节，11个比特定义了链路层的流控制，5个比特的CRC5确保数据完整 |
+| Link Delay Measurement (LDM) | 
 
 > Written with [StackEdit](https://stackedit.io/)
